@@ -33,8 +33,6 @@ function wikiEncoding(strHTML) {
     const ch = str[i];
     if (ch === "|" || ch === "#") {
       continue;
-    } else if (ch === "=") {
-      out.push("-");
     } else if ("<[{".includes(ch)) {
       out.push("(");
     } else if (">]}".includes(ch)) {
