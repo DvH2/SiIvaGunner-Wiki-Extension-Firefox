@@ -26,17 +26,20 @@ else if (window.location.href.indexOf("siivagunner.fandom.com") > -1) {
   window.open(url);
 }
 
-function wikiEncoding(str) {
+function wikiEncoding(strHTML) {
+  var str = strHTML.replaceAll('&amp;','&')
   const out = [];
   for (let i = 0; i < str.length; i++) {
     const ch = str[i];
     if (ch === "|" || ch === "#") {
       continue;
+    } else if (ch === "=") {
+      out.push("-");
     } else if ("<[{".includes(ch)) {
       out.push("(");
     } else if (">]}".includes(ch)) {
       out.push(")");
-    } else if ("%&+=?".includes(ch)) {
+    } else if ("%&?".includes(ch)) {
       out.push("%" + ch.charCodeAt(0).toString(16));
     } else {
       out.push(ch);
